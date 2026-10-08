@@ -1,6 +1,6 @@
 <?php
 /**
- * PaginatedAuditEventList
+ * StandardPack
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Santati\Core\ObjectSerializer;
 
 /**
- * PaginatedAuditEventList Class Doc Comment
+ * StandardPack Class Doc Comment
  *
  * @category Class
  * @package  Santati\Core
@@ -40,7 +40,7 @@ use \Santati\Core\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSerializable
+class StandardPack implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      *
      * @var string
      */
-    protected static $openAPIModelName = 'PaginatedAuditEventList';
+    protected static $openAPIModelName = 'StandardPack';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +57,10 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $openAPITypes = [
-        'next' => 'string',
-        'previous' => 'string',
-        'results' => '\Santati\Core\Model\AuditEvent[]'
+        'slug' => 'string',
+        'name' => 'string',
+        'description' => 'string',
+        'events' => '\Santati\Core\Model\StandardEvent[]'
     ];
 
     /**
@@ -70,9 +71,10 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'next' => null,
-        'previous' => null,
-        'results' => null
+        'slug' => null,
+        'name' => null,
+        'description' => null,
+        'events' => null
     ];
 
     /**
@@ -81,9 +83,10 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'next' => true,
-        'previous' => true,
-        'results' => false
+        'slug' => false,
+        'name' => false,
+        'description' => false,
+        'events' => false
     ];
 
     /**
@@ -172,9 +175,10 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $attributeMap = [
-        'next' => 'next',
-        'previous' => 'previous',
-        'results' => 'results'
+        'slug' => 'slug',
+        'name' => 'name',
+        'description' => 'description',
+        'events' => 'events'
     ];
 
     /**
@@ -183,9 +187,10 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $setters = [
-        'next' => 'setNext',
-        'previous' => 'setPrevious',
-        'results' => 'setResults'
+        'slug' => 'setSlug',
+        'name' => 'setName',
+        'description' => 'setDescription',
+        'events' => 'setEvents'
     ];
 
     /**
@@ -194,9 +199,10 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $getters = [
-        'next' => 'getNext',
-        'previous' => 'getPrevious',
-        'results' => 'getResults'
+        'slug' => 'getSlug',
+        'name' => 'getName',
+        'description' => 'getDescription',
+        'events' => 'getEvents'
     ];
 
     /**
@@ -256,9 +262,10 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('next', $data ?? [], null);
-        $this->setIfExists('previous', $data ?? [], null);
-        $this->setIfExists('results', $data ?? [], null);
+        $this->setIfExists('slug', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('events', $data ?? [], null);
     }
 
     /**
@@ -288,8 +295,17 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
     {
         $invalidProperties = [];
 
-        if ($this->container['results'] === null) {
-            $invalidProperties[] = "'results' can't be null";
+        if ($this->container['slug'] === null) {
+            $invalidProperties[] = "'slug' can't be null";
+        }
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
+        }
+        if ($this->container['description'] === null) {
+            $invalidProperties[] = "'description' can't be null";
+        }
+        if ($this->container['events'] === null) {
+            $invalidProperties[] = "'events' can't be null";
         }
         return $invalidProperties;
     }
@@ -307,96 +323,109 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
 
 
     /**
-     * Gets next
+     * Gets slug
      *
-     * @return string|null
+     * @return string
      */
-    public function getNext()
+    public function getSlug()
     {
-        return $this->container['next'];
+        return $this->container['slug'];
     }
 
     /**
-     * Sets next
+     * Sets slug
      *
-     * @param string|null $next URL of the next page of results, or null on the last page.
+     * @param string $slug Stable identifier of the pack.
      *
      * @return self
      */
-    public function setNext($next)
+    public function setSlug($slug)
     {
-        if (is_null($next)) {
-            array_push($this->openAPINullablesSetToNull, 'next');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('next', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($slug)) {
+            throw new \InvalidArgumentException('non-nullable slug cannot be null');
         }
-        $this->container['next'] = $next;
+        $this->container['slug'] = $slug;
 
         return $this;
     }
 
     /**
-     * Gets previous
+     * Gets name
      *
-     * @return string|null
+     * @return string
      */
-    public function getPrevious()
+    public function getName()
     {
-        return $this->container['previous'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets previous
+     * Sets name
      *
-     * @param string|null $previous URL of the previous page of results, or null on the first page.
+     * @param string $name Display name of the pack.
      *
      * @return self
      */
-    public function setPrevious($previous)
+    public function setName($name)
     {
-        if (is_null($previous)) {
-            array_push($this->openAPINullablesSetToNull, 'previous');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('previous', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $this->container['previous'] = $previous;
+        $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets results
+     * Gets description
      *
-     * @return \Santati\Core\Model\AuditEvent[]
+     * @return string
      */
-    public function getResults()
+    public function getDescription()
     {
-        return $this->container['results'];
+        return $this->container['description'];
     }
 
     /**
-     * Sets results
+     * Sets description
      *
-     * @param \Santati\Core\Model\AuditEvent[] $results results
+     * @param string $description What the pack covers.
      *
      * @return self
      */
-    public function setResults($results)
+    public function setDescription($description)
     {
-        if (is_null($results)) {
-            throw new \InvalidArgumentException('non-nullable results cannot be null');
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
         }
-        $this->container['results'] = $results;
+        $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets events
+     *
+     * @return \Santati\Core\Model\StandardEvent[]
+     */
+    public function getEvents()
+    {
+        return $this->container['events'];
+    }
+
+    /**
+     * Sets events
+     *
+     * @param \Santati\Core\Model\StandardEvent[] $events The pack's actions.
+     *
+     * @return self
+     */
+    public function setEvents($events)
+    {
+        if (is_null($events)) {
+            throw new \InvalidArgumentException('non-nullable events cannot be null');
+        }
+        $this->container['events'] = $events;
 
         return $this;
     }

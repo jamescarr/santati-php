@@ -1,6 +1,6 @@
 <?php
 /**
- * PaginatedAuditEventList
+ * StandardEvent
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Santati\Core\ObjectSerializer;
 
 /**
- * PaginatedAuditEventList Class Doc Comment
+ * StandardEvent Class Doc Comment
  *
  * @category Class
  * @package  Santati\Core
@@ -40,7 +40,7 @@ use \Santati\Core\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSerializable
+class StandardEvent implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      *
      * @var string
      */
-    protected static $openAPIModelName = 'PaginatedAuditEventList';
+    protected static $openAPIModelName = 'StandardEvent';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +57,13 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $openAPITypes = [
-        'next' => 'string',
-        'previous' => 'string',
-        'results' => '\Santati\Core\Model\AuditEvent[]'
+        'action' => 'string',
+        'description' => 'string',
+        'target_types' => 'string[]',
+        'required_metadata' => 'string[]',
+        'optional_metadata' => 'string[]',
+        'schema' => 'array<string,mixed>',
+        'ocsf' => '\Santati\Core\Model\OcsfMapping'
     ];
 
     /**
@@ -70,9 +74,13 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'next' => null,
-        'previous' => null,
-        'results' => null
+        'action' => null,
+        'description' => null,
+        'target_types' => null,
+        'required_metadata' => null,
+        'optional_metadata' => null,
+        'schema' => null,
+        'ocsf' => null
     ];
 
     /**
@@ -81,9 +89,13 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'next' => true,
-        'previous' => true,
-        'results' => false
+        'action' => false,
+        'description' => false,
+        'target_types' => false,
+        'required_metadata' => false,
+        'optional_metadata' => false,
+        'schema' => false,
+        'ocsf' => false
     ];
 
     /**
@@ -172,9 +184,13 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $attributeMap = [
-        'next' => 'next',
-        'previous' => 'previous',
-        'results' => 'results'
+        'action' => 'action',
+        'description' => 'description',
+        'target_types' => 'target_types',
+        'required_metadata' => 'required_metadata',
+        'optional_metadata' => 'optional_metadata',
+        'schema' => 'schema',
+        'ocsf' => 'ocsf'
     ];
 
     /**
@@ -183,9 +199,13 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $setters = [
-        'next' => 'setNext',
-        'previous' => 'setPrevious',
-        'results' => 'setResults'
+        'action' => 'setAction',
+        'description' => 'setDescription',
+        'target_types' => 'setTargetTypes',
+        'required_metadata' => 'setRequiredMetadata',
+        'optional_metadata' => 'setOptionalMetadata',
+        'schema' => 'setSchema',
+        'ocsf' => 'setOcsf'
     ];
 
     /**
@@ -194,9 +214,13 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $getters = [
-        'next' => 'getNext',
-        'previous' => 'getPrevious',
-        'results' => 'getResults'
+        'action' => 'getAction',
+        'description' => 'getDescription',
+        'target_types' => 'getTargetTypes',
+        'required_metadata' => 'getRequiredMetadata',
+        'optional_metadata' => 'getOptionalMetadata',
+        'schema' => 'getSchema',
+        'ocsf' => 'getOcsf'
     ];
 
     /**
@@ -256,9 +280,13 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('next', $data ?? [], null);
-        $this->setIfExists('previous', $data ?? [], null);
-        $this->setIfExists('results', $data ?? [], null);
+        $this->setIfExists('action', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('target_types', $data ?? [], null);
+        $this->setIfExists('required_metadata', $data ?? [], null);
+        $this->setIfExists('optional_metadata', $data ?? [], null);
+        $this->setIfExists('schema', $data ?? [], null);
+        $this->setIfExists('ocsf', $data ?? [], null);
     }
 
     /**
@@ -288,8 +316,26 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
     {
         $invalidProperties = [];
 
-        if ($this->container['results'] === null) {
-            $invalidProperties[] = "'results' can't be null";
+        if ($this->container['action'] === null) {
+            $invalidProperties[] = "'action' can't be null";
+        }
+        if ($this->container['description'] === null) {
+            $invalidProperties[] = "'description' can't be null";
+        }
+        if ($this->container['target_types'] === null) {
+            $invalidProperties[] = "'target_types' can't be null";
+        }
+        if ($this->container['required_metadata'] === null) {
+            $invalidProperties[] = "'required_metadata' can't be null";
+        }
+        if ($this->container['optional_metadata'] === null) {
+            $invalidProperties[] = "'optional_metadata' can't be null";
+        }
+        if ($this->container['schema'] === null) {
+            $invalidProperties[] = "'schema' can't be null";
+        }
+        if ($this->container['ocsf'] === null) {
+            $invalidProperties[] = "'ocsf' can't be null";
         }
         return $invalidProperties;
     }
@@ -307,96 +353,190 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
 
 
     /**
-     * Gets next
+     * Gets action
      *
-     * @return string|null
+     * @return string
      */
-    public function getNext()
+    public function getAction()
     {
-        return $this->container['next'];
+        return $this->container['action'];
     }
 
     /**
-     * Sets next
+     * Sets action
      *
-     * @param string|null $next URL of the next page of results, or null on the last page.
+     * @param string $action The action name, e.g. agent.tool.called.
      *
      * @return self
      */
-    public function setNext($next)
+    public function setAction($action)
     {
-        if (is_null($next)) {
-            array_push($this->openAPINullablesSetToNull, 'next');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('next', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($action)) {
+            throw new \InvalidArgumentException('non-nullable action cannot be null');
         }
-        $this->container['next'] = $next;
+        $this->container['action'] = $action;
 
         return $this;
     }
 
     /**
-     * Gets previous
+     * Gets description
      *
-     * @return string|null
+     * @return string
      */
-    public function getPrevious()
+    public function getDescription()
     {
-        return $this->container['previous'];
+        return $this->container['description'];
     }
 
     /**
-     * Sets previous
+     * Sets description
      *
-     * @param string|null $previous URL of the previous page of results, or null on the first page.
+     * @param string $description What the action means.
      *
      * @return self
      */
-    public function setPrevious($previous)
+    public function setDescription($description)
     {
-        if (is_null($previous)) {
-            array_push($this->openAPINullablesSetToNull, 'previous');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('previous', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
         }
-        $this->container['previous'] = $previous;
+        $this->container['description'] = $description;
 
         return $this;
     }
 
     /**
-     * Gets results
+     * Gets target_types
      *
-     * @return \Santati\Core\Model\AuditEvent[]
+     * @return string[]
      */
-    public function getResults()
+    public function getTargetTypes()
     {
-        return $this->container['results'];
+        return $this->container['target_types'];
     }
 
     /**
-     * Sets results
+     * Sets target_types
      *
-     * @param \Santati\Core\Model\AuditEvent[] $results results
+     * @param string[] $target_types Target types installed as the action's allowed target types; empty means any.
      *
      * @return self
      */
-    public function setResults($results)
+    public function setTargetTypes($target_types)
     {
-        if (is_null($results)) {
-            throw new \InvalidArgumentException('non-nullable results cannot be null');
+        if (is_null($target_types)) {
+            throw new \InvalidArgumentException('non-nullable target_types cannot be null');
         }
-        $this->container['results'] = $results;
+        $this->container['target_types'] = $target_types;
+
+        return $this;
+    }
+
+    /**
+     * Gets required_metadata
+     *
+     * @return string[]
+     */
+    public function getRequiredMetadata()
+    {
+        return $this->container['required_metadata'];
+    }
+
+    /**
+     * Sets required_metadata
+     *
+     * @param string[] $required_metadata Metadata keys every event with this action must carry.
+     *
+     * @return self
+     */
+    public function setRequiredMetadata($required_metadata)
+    {
+        if (is_null($required_metadata)) {
+            throw new \InvalidArgumentException('non-nullable required_metadata cannot be null');
+        }
+        $this->container['required_metadata'] = $required_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets optional_metadata
+     *
+     * @return string[]
+     */
+    public function getOptionalMetadata()
+    {
+        return $this->container['optional_metadata'];
+    }
+
+    /**
+     * Sets optional_metadata
+     *
+     * @param string[] $optional_metadata Metadata keys the schema declares as strings but does not require.
+     *
+     * @return self
+     */
+    public function setOptionalMetadata($optional_metadata)
+    {
+        if (is_null($optional_metadata)) {
+            throw new \InvalidArgumentException('non-nullable optional_metadata cannot be null');
+        }
+        $this->container['optional_metadata'] = $optional_metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets schema
+     *
+     * @return array<string,mixed>
+     */
+    public function getSchema()
+    {
+        return $this->container['schema'];
+    }
+
+    /**
+     * Sets schema
+     *
+     * @param array<string,mixed> $schema The JSON Schema 2020-12 document installed as the action's published v1.
+     *
+     * @return self
+     */
+    public function setSchema($schema)
+    {
+        if (is_null($schema)) {
+            throw new \InvalidArgumentException('non-nullable schema cannot be null');
+        }
+        $this->container['schema'] = $schema;
+
+        return $this;
+    }
+
+    /**
+     * Gets ocsf
+     *
+     * @return \Santati\Core\Model\OcsfMapping
+     */
+    public function getOcsf()
+    {
+        return $this->container['ocsf'];
+    }
+
+    /**
+     * Sets ocsf
+     *
+     * @param \Santati\Core\Model\OcsfMapping $ocsf The action's OCSF class and activity.
+     *
+     * @return self
+     */
+    public function setOcsf($ocsf)
+    {
+        if (is_null($ocsf)) {
+            throw new \InvalidArgumentException('non-nullable ocsf cannot be null');
+        }
+        $this->container['ocsf'] = $ocsf;
 
         return $this;
     }

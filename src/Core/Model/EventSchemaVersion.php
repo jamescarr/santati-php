@@ -1,6 +1,6 @@
 <?php
 /**
- * PaginatedAuditEventList
+ * EventSchemaVersion
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Santati\Core\ObjectSerializer;
 
 /**
- * PaginatedAuditEventList Class Doc Comment
+ * EventSchemaVersion Class Doc Comment
  *
  * @category Class
  * @package  Santati\Core
@@ -40,7 +40,7 @@ use \Santati\Core\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSerializable
+class EventSchemaVersion implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      *
      * @var string
      */
-    protected static $openAPIModelName = 'PaginatedAuditEventList';
+    protected static $openAPIModelName = 'EventSchemaVersion';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +57,14 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $openAPITypes = [
-        'next' => 'string',
-        'previous' => 'string',
-        'results' => '\Santati\Core\Model\AuditEvent[]'
+        'version' => 'int',
+        'status' => 'string',
+        'schema' => 'array<string,mixed>',
+        'published_at' => 'string',
+        'deprecated_at' => 'string',
+        'deprecation_deadline' => 'string',
+        'created_at' => 'string',
+        'updated_at' => 'string'
     ];
 
     /**
@@ -70,9 +75,14 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'next' => null,
-        'previous' => null,
-        'results' => null
+        'version' => null,
+        'status' => null,
+        'schema' => null,
+        'published_at' => null,
+        'deprecated_at' => null,
+        'deprecation_deadline' => null,
+        'created_at' => null,
+        'updated_at' => null
     ];
 
     /**
@@ -81,9 +91,14 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'next' => true,
-        'previous' => true,
-        'results' => false
+        'version' => false,
+        'status' => false,
+        'schema' => false,
+        'published_at' => true,
+        'deprecated_at' => true,
+        'deprecation_deadline' => true,
+        'created_at' => false,
+        'updated_at' => false
     ];
 
     /**
@@ -172,9 +187,14 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $attributeMap = [
-        'next' => 'next',
-        'previous' => 'previous',
-        'results' => 'results'
+        'version' => 'version',
+        'status' => 'status',
+        'schema' => 'schema',
+        'published_at' => 'published_at',
+        'deprecated_at' => 'deprecated_at',
+        'deprecation_deadline' => 'deprecation_deadline',
+        'created_at' => 'created_at',
+        'updated_at' => 'updated_at'
     ];
 
     /**
@@ -183,9 +203,14 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $setters = [
-        'next' => 'setNext',
-        'previous' => 'setPrevious',
-        'results' => 'setResults'
+        'version' => 'setVersion',
+        'status' => 'setStatus',
+        'schema' => 'setSchema',
+        'published_at' => 'setPublishedAt',
+        'deprecated_at' => 'setDeprecatedAt',
+        'deprecation_deadline' => 'setDeprecationDeadline',
+        'created_at' => 'setCreatedAt',
+        'updated_at' => 'setUpdatedAt'
     ];
 
     /**
@@ -194,9 +219,14 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $getters = [
-        'next' => 'getNext',
-        'previous' => 'getPrevious',
-        'results' => 'getResults'
+        'version' => 'getVersion',
+        'status' => 'getStatus',
+        'schema' => 'getSchema',
+        'published_at' => 'getPublishedAt',
+        'deprecated_at' => 'getDeprecatedAt',
+        'deprecation_deadline' => 'getDeprecationDeadline',
+        'created_at' => 'getCreatedAt',
+        'updated_at' => 'getUpdatedAt'
     ];
 
     /**
@@ -256,9 +286,14 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('next', $data ?? [], null);
-        $this->setIfExists('previous', $data ?? [], null);
-        $this->setIfExists('results', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('schema', $data ?? [], null);
+        $this->setIfExists('published_at', $data ?? [], null);
+        $this->setIfExists('deprecated_at', $data ?? [], null);
+        $this->setIfExists('deprecation_deadline', $data ?? [], null);
+        $this->setIfExists('created_at', $data ?? [], null);
+        $this->setIfExists('updated_at', $data ?? [], null);
     }
 
     /**
@@ -288,8 +323,29 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
     {
         $invalidProperties = [];
 
-        if ($this->container['results'] === null) {
-            $invalidProperties[] = "'results' can't be null";
+        if ($this->container['version'] === null) {
+            $invalidProperties[] = "'version' can't be null";
+        }
+        if ($this->container['status'] === null) {
+            $invalidProperties[] = "'status' can't be null";
+        }
+        if ($this->container['schema'] === null) {
+            $invalidProperties[] = "'schema' can't be null";
+        }
+        if ($this->container['published_at'] === null && !$this->isNullableSetToNull('published_at')) {
+            $invalidProperties[] = "'published_at' is required";
+        }
+        if ($this->container['deprecated_at'] === null && !$this->isNullableSetToNull('deprecated_at')) {
+            $invalidProperties[] = "'deprecated_at' is required";
+        }
+        if ($this->container['deprecation_deadline'] === null && !$this->isNullableSetToNull('deprecation_deadline')) {
+            $invalidProperties[] = "'deprecation_deadline' is required";
+        }
+        if ($this->container['created_at'] === null) {
+            $invalidProperties[] = "'created_at' can't be null";
+        }
+        if ($this->container['updated_at'] === null) {
+            $invalidProperties[] = "'updated_at' can't be null";
         }
         return $invalidProperties;
     }
@@ -307,96 +363,238 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
 
 
     /**
-     * Gets next
+     * Gets version
      *
-     * @return string|null
+     * @return int
      */
-    public function getNext()
+    public function getVersion()
     {
-        return $this->container['next'];
+        return $this->container['version'];
     }
 
     /**
-     * Sets next
+     * Sets version
      *
-     * @param string|null $next URL of the next page of results, or null on the last page.
+     * @param int $version The per-action version number; never reused, even after a draft is deleted.
      *
      * @return self
      */
-    public function setNext($next)
+    public function setVersion($version)
     {
-        if (is_null($next)) {
-            array_push($this->openAPINullablesSetToNull, 'next');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('next', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($version)) {
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
         }
-        $this->container['next'] = $next;
+        $this->container['version'] = $version;
 
         return $this;
     }
 
     /**
-     * Gets previous
+     * Gets status
      *
-     * @return string|null
+     * @return string
      */
-    public function getPrevious()
+    public function getStatus()
     {
-        return $this->container['previous'];
+        return $this->container['status'];
     }
 
     /**
-     * Sets previous
+     * Sets status
      *
-     * @param string|null $previous URL of the previous page of results, or null on the first page.
+     * @param string $status draft: editable, validates nothing. published: immutable, validates ingest. deprecated: a newer version superseded it; pinned producers are accepted until `deprecation_deadline`.  * `draft` - Draft * `published` - Published * `deprecated` - Deprecated
      *
      * @return self
      */
-    public function setPrevious($previous)
+    public function setStatus($status)
     {
-        if (is_null($previous)) {
-            array_push($this->openAPINullablesSetToNull, 'previous');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('previous', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($status)) {
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
-        $this->container['previous'] = $previous;
+        $this->container['status'] = $status;
 
         return $this;
     }
 
     /**
-     * Gets results
+     * Gets schema
      *
-     * @return \Santati\Core\Model\AuditEvent[]
+     * @return array<string,mixed>
      */
-    public function getResults()
+    public function getSchema()
     {
-        return $this->container['results'];
+        return $this->container['schema'];
     }
 
     /**
-     * Sets results
+     * Sets schema
      *
-     * @param \Santati\Core\Model\AuditEvent[] $results results
+     * @param array<string,mixed> $schema The JSON Schema 2020-12 document. It validates the event's `metadata`, `actor.metadata` and each `targets[].metadata`; metadata values are always strings.
      *
      * @return self
      */
-    public function setResults($results)
+    public function setSchema($schema)
     {
-        if (is_null($results)) {
-            throw new \InvalidArgumentException('non-nullable results cannot be null');
+        if (is_null($schema)) {
+            throw new \InvalidArgumentException('non-nullable schema cannot be null');
         }
-        $this->container['results'] = $results;
+        $this->container['schema'] = $schema;
+
+        return $this;
+    }
+
+    /**
+     * Gets published_at
+     *
+     * @return string|null
+     */
+    public function getPublishedAt()
+    {
+        return $this->container['published_at'];
+    }
+
+    /**
+     * Sets published_at
+     *
+     * @param string|null $published_at When the version was published; null for a draft.
+     *
+     * @return self
+     */
+    public function setPublishedAt($published_at)
+    {
+        if (is_null($published_at)) {
+            array_push($this->openAPINullablesSetToNull, 'published_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('published_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['published_at'] = $published_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets deprecated_at
+     *
+     * @return string|null
+     */
+    public function getDeprecatedAt()
+    {
+        return $this->container['deprecated_at'];
+    }
+
+    /**
+     * Sets deprecated_at
+     *
+     * @param string|null $deprecated_at When a newer version superseded this one; null until then.
+     *
+     * @return self
+     */
+    public function setDeprecatedAt($deprecated_at)
+    {
+        if (is_null($deprecated_at)) {
+            array_push($this->openAPINullablesSetToNull, 'deprecated_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('deprecated_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['deprecated_at'] = $deprecated_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets deprecation_deadline
+     *
+     * @return string|null
+     */
+    public function getDeprecationDeadline()
+    {
+        return $this->container['deprecation_deadline'];
+    }
+
+    /**
+     * Sets deprecation_deadline
+     *
+     * @param string|null $deprecation_deadline When a deprecated version stops accepting pinned traffic; null while it is not deprecated.
+     *
+     * @return self
+     */
+    public function setDeprecationDeadline($deprecation_deadline)
+    {
+        if (is_null($deprecation_deadline)) {
+            array_push($this->openAPINullablesSetToNull, 'deprecation_deadline');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('deprecation_deadline', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['deprecation_deadline'] = $deprecation_deadline;
+
+        return $this;
+    }
+
+    /**
+     * Gets created_at
+     *
+     * @return string
+     */
+    public function getCreatedAt()
+    {
+        return $this->container['created_at'];
+    }
+
+    /**
+     * Sets created_at
+     *
+     * @param string $created_at When the draft was first created.
+     *
+     * @return self
+     */
+    public function setCreatedAt($created_at)
+    {
+        if (is_null($created_at)) {
+            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
+        }
+        $this->container['created_at'] = $created_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets updated_at
+     *
+     * @return string
+     */
+    public function getUpdatedAt()
+    {
+        return $this->container['updated_at'];
+    }
+
+    /**
+     * Sets updated_at
+     *
+     * @param string $updated_at When the version last changed. The `ETag` tracks it.
+     *
+     * @return self
+     */
+    public function setUpdatedAt($updated_at)
+    {
+        if (is_null($updated_at)) {
+            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
+        }
+        $this->container['updated_at'] = $updated_at;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * PaginatedAuditEventList
+ * StandardPackInstallResult
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Santati\Core\ObjectSerializer;
 
 /**
- * PaginatedAuditEventList Class Doc Comment
+ * StandardPackInstallResult Class Doc Comment
  *
  * @category Class
  * @package  Santati\Core
@@ -40,7 +40,7 @@ use \Santati\Core\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSerializable
+class StandardPackInstallResult implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      *
      * @var string
      */
-    protected static $openAPIModelName = 'PaginatedAuditEventList';
+    protected static $openAPIModelName = 'StandardPackInstallResult';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +57,8 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $openAPITypes = [
-        'next' => 'string',
-        'previous' => 'string',
-        'results' => '\Santati\Core\Model\AuditEvent[]'
+        'created' => 'string[]',
+        'skipped' => 'string[]'
     ];
 
     /**
@@ -70,9 +69,8 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'next' => null,
-        'previous' => null,
-        'results' => null
+        'created' => null,
+        'skipped' => null
     ];
 
     /**
@@ -81,9 +79,8 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'next' => true,
-        'previous' => true,
-        'results' => false
+        'created' => false,
+        'skipped' => false
     ];
 
     /**
@@ -172,9 +169,8 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $attributeMap = [
-        'next' => 'next',
-        'previous' => 'previous',
-        'results' => 'results'
+        'created' => 'created',
+        'skipped' => 'skipped'
     ];
 
     /**
@@ -183,9 +179,8 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $setters = [
-        'next' => 'setNext',
-        'previous' => 'setPrevious',
-        'results' => 'setResults'
+        'created' => 'setCreated',
+        'skipped' => 'setSkipped'
     ];
 
     /**
@@ -194,9 +189,8 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $getters = [
-        'next' => 'getNext',
-        'previous' => 'getPrevious',
-        'results' => 'getResults'
+        'created' => 'getCreated',
+        'skipped' => 'getSkipped'
     ];
 
     /**
@@ -256,9 +250,8 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('next', $data ?? [], null);
-        $this->setIfExists('previous', $data ?? [], null);
-        $this->setIfExists('results', $data ?? [], null);
+        $this->setIfExists('created', $data ?? [], null);
+        $this->setIfExists('skipped', $data ?? [], null);
     }
 
     /**
@@ -288,8 +281,11 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
     {
         $invalidProperties = [];
 
-        if ($this->container['results'] === null) {
-            $invalidProperties[] = "'results' can't be null";
+        if ($this->container['created'] === null) {
+            $invalidProperties[] = "'created' can't be null";
+        }
+        if ($this->container['skipped'] === null) {
+            $invalidProperties[] = "'skipped' can't be null";
         }
         return $invalidProperties;
     }
@@ -307,96 +303,55 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
 
 
     /**
-     * Gets next
+     * Gets created
      *
-     * @return string|null
+     * @return string[]
      */
-    public function getNext()
+    public function getCreated()
     {
-        return $this->container['next'];
+        return $this->container['created'];
     }
 
     /**
-     * Sets next
+     * Sets created
      *
-     * @param string|null $next URL of the next page of results, or null on the last page.
+     * @param string[] $created Actions defined now, each with a published v1.
      *
      * @return self
      */
-    public function setNext($next)
+    public function setCreated($created)
     {
-        if (is_null($next)) {
-            array_push($this->openAPINullablesSetToNull, 'next');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('next', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($created)) {
+            throw new \InvalidArgumentException('non-nullable created cannot be null');
         }
-        $this->container['next'] = $next;
+        $this->container['created'] = $created;
 
         return $this;
     }
 
     /**
-     * Gets previous
+     * Gets skipped
      *
-     * @return string|null
+     * @return string[]
      */
-    public function getPrevious()
+    public function getSkipped()
     {
-        return $this->container['previous'];
+        return $this->container['skipped'];
     }
 
     /**
-     * Sets previous
+     * Sets skipped
      *
-     * @param string|null $previous URL of the previous page of results, or null on the first page.
+     * @param string[] $skipped Actions the team already defined; they are left untouched.
      *
      * @return self
      */
-    public function setPrevious($previous)
+    public function setSkipped($skipped)
     {
-        if (is_null($previous)) {
-            array_push($this->openAPINullablesSetToNull, 'previous');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('previous', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($skipped)) {
+            throw new \InvalidArgumentException('non-nullable skipped cannot be null');
         }
-        $this->container['previous'] = $previous;
-
-        return $this;
-    }
-
-    /**
-     * Gets results
-     *
-     * @return \Santati\Core\Model\AuditEvent[]
-     */
-    public function getResults()
-    {
-        return $this->container['results'];
-    }
-
-    /**
-     * Sets results
-     *
-     * @param \Santati\Core\Model\AuditEvent[] $results results
-     *
-     * @return self
-     */
-    public function setResults($results)
-    {
-        if (is_null($results)) {
-            throw new \InvalidArgumentException('non-nullable results cannot be null');
-        }
-        $this->container['results'] = $results;
+        $this->container['skipped'] = $skipped;
 
         return $this;
     }

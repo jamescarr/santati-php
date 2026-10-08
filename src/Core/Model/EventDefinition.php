@@ -1,6 +1,6 @@
 <?php
 /**
- * PaginatedAuditEventList
+ * EventDefinition
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Santati\Core\ObjectSerializer;
 
 /**
- * PaginatedAuditEventList Class Doc Comment
+ * EventDefinition Class Doc Comment
  *
  * @category Class
  * @package  Santati\Core
@@ -40,7 +40,7 @@ use \Santati\Core\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSerializable
+class EventDefinition implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      *
      * @var string
      */
-    protected static $openAPIModelName = 'PaginatedAuditEventList';
+    protected static $openAPIModelName = 'EventDefinition';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +57,12 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $openAPITypes = [
-        'next' => 'string',
-        'previous' => 'string',
-        'results' => '\Santati\Core\Model\AuditEvent[]'
+        'action' => 'string',
+        'description' => 'string',
+        'allowed_target_types' => 'string[]',
+        'is_active' => 'bool',
+        'created_at' => 'string',
+        'updated_at' => 'string'
     ];
 
     /**
@@ -70,9 +73,12 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'next' => null,
-        'previous' => null,
-        'results' => null
+        'action' => null,
+        'description' => null,
+        'allowed_target_types' => null,
+        'is_active' => null,
+        'created_at' => null,
+        'updated_at' => null
     ];
 
     /**
@@ -81,9 +87,12 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'next' => true,
-        'previous' => true,
-        'results' => false
+        'action' => false,
+        'description' => false,
+        'allowed_target_types' => false,
+        'is_active' => false,
+        'created_at' => false,
+        'updated_at' => false
     ];
 
     /**
@@ -172,9 +181,12 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $attributeMap = [
-        'next' => 'next',
-        'previous' => 'previous',
-        'results' => 'results'
+        'action' => 'action',
+        'description' => 'description',
+        'allowed_target_types' => 'allowed_target_types',
+        'is_active' => 'is_active',
+        'created_at' => 'created_at',
+        'updated_at' => 'updated_at'
     ];
 
     /**
@@ -183,9 +195,12 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $setters = [
-        'next' => 'setNext',
-        'previous' => 'setPrevious',
-        'results' => 'setResults'
+        'action' => 'setAction',
+        'description' => 'setDescription',
+        'allowed_target_types' => 'setAllowedTargetTypes',
+        'is_active' => 'setIsActive',
+        'created_at' => 'setCreatedAt',
+        'updated_at' => 'setUpdatedAt'
     ];
 
     /**
@@ -194,9 +209,12 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $getters = [
-        'next' => 'getNext',
-        'previous' => 'getPrevious',
-        'results' => 'getResults'
+        'action' => 'getAction',
+        'description' => 'getDescription',
+        'allowed_target_types' => 'getAllowedTargetTypes',
+        'is_active' => 'getIsActive',
+        'created_at' => 'getCreatedAt',
+        'updated_at' => 'getUpdatedAt'
     ];
 
     /**
@@ -256,9 +274,12 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('next', $data ?? [], null);
-        $this->setIfExists('previous', $data ?? [], null);
-        $this->setIfExists('results', $data ?? [], null);
+        $this->setIfExists('action', $data ?? [], null);
+        $this->setIfExists('description', $data ?? [], null);
+        $this->setIfExists('allowed_target_types', $data ?? [], null);
+        $this->setIfExists('is_active', $data ?? [], null);
+        $this->setIfExists('created_at', $data ?? [], null);
+        $this->setIfExists('updated_at', $data ?? [], null);
     }
 
     /**
@@ -288,8 +309,23 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
     {
         $invalidProperties = [];
 
-        if ($this->container['results'] === null) {
-            $invalidProperties[] = "'results' can't be null";
+        if ($this->container['action'] === null) {
+            $invalidProperties[] = "'action' can't be null";
+        }
+        if ($this->container['description'] === null) {
+            $invalidProperties[] = "'description' can't be null";
+        }
+        if ($this->container['allowed_target_types'] === null) {
+            $invalidProperties[] = "'allowed_target_types' can't be null";
+        }
+        if ($this->container['is_active'] === null) {
+            $invalidProperties[] = "'is_active' can't be null";
+        }
+        if ($this->container['created_at'] === null) {
+            $invalidProperties[] = "'created_at' can't be null";
+        }
+        if ($this->container['updated_at'] === null) {
+            $invalidProperties[] = "'updated_at' can't be null";
         }
         return $invalidProperties;
     }
@@ -307,96 +343,163 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
 
 
     /**
-     * Gets next
+     * Gets action
      *
-     * @return string|null
+     * @return string
      */
-    public function getNext()
+    public function getAction()
     {
-        return $this->container['next'];
+        return $this->container['action'];
     }
 
     /**
-     * Sets next
+     * Sets action
      *
-     * @param string|null $next URL of the next page of results, or null on the last page.
+     * @param string $action The action name, e.g. invoice.voided.
      *
      * @return self
      */
-    public function setNext($next)
+    public function setAction($action)
     {
-        if (is_null($next)) {
-            array_push($this->openAPINullablesSetToNull, 'next');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('next', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($action)) {
+            throw new \InvalidArgumentException('non-nullable action cannot be null');
         }
-        $this->container['next'] = $next;
+        $this->container['action'] = $action;
 
         return $this;
     }
 
     /**
-     * Gets previous
+     * Gets description
      *
-     * @return string|null
+     * @return string
      */
-    public function getPrevious()
+    public function getDescription()
     {
-        return $this->container['previous'];
+        return $this->container['description'];
     }
 
     /**
-     * Sets previous
+     * Sets description
      *
-     * @param string|null $previous URL of the previous page of results, or null on the first page.
+     * @param string $description What this action means, for the people reading the catalog.
      *
      * @return self
      */
-    public function setPrevious($previous)
+    public function setDescription($description)
     {
-        if (is_null($previous)) {
-            array_push($this->openAPINullablesSetToNull, 'previous');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('previous', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($description)) {
+            throw new \InvalidArgumentException('non-nullable description cannot be null');
         }
-        $this->container['previous'] = $previous;
+        $this->container['description'] = $description;
 
         return $this;
     }
 
     /**
-     * Gets results
+     * Gets allowed_target_types
      *
-     * @return \Santati\Core\Model\AuditEvent[]
+     * @return string[]
      */
-    public function getResults()
+    public function getAllowedTargetTypes()
     {
-        return $this->container['results'];
+        return $this->container['allowed_target_types'];
     }
 
     /**
-     * Sets results
+     * Sets allowed_target_types
      *
-     * @param \Santati\Core\Model\AuditEvent[] $results results
+     * @param string[] $allowed_target_types Target types an event with this action may name; empty means any target type.
      *
      * @return self
      */
-    public function setResults($results)
+    public function setAllowedTargetTypes($allowed_target_types)
     {
-        if (is_null($results)) {
-            throw new \InvalidArgumentException('non-nullable results cannot be null');
+        if (is_null($allowed_target_types)) {
+            throw new \InvalidArgumentException('non-nullable allowed_target_types cannot be null');
         }
-        $this->container['results'] = $results;
+        $this->container['allowed_target_types'] = $allowed_target_types;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_active
+     *
+     * @return bool
+     */
+    public function getIsActive()
+    {
+        return $this->container['is_active'];
+    }
+
+    /**
+     * Sets is_active
+     *
+     * @param bool $is_active True while the action is in force. A definition that is not active is treated as undefined when a team has any definitions at all.
+     *
+     * @return self
+     */
+    public function setIsActive($is_active)
+    {
+        if (is_null($is_active)) {
+            throw new \InvalidArgumentException('non-nullable is_active cannot be null');
+        }
+        $this->container['is_active'] = $is_active;
+
+        return $this;
+    }
+
+    /**
+     * Gets created_at
+     *
+     * @return string
+     */
+    public function getCreatedAt()
+    {
+        return $this->container['created_at'];
+    }
+
+    /**
+     * Sets created_at
+     *
+     * @param string $created_at When the action was first defined.
+     *
+     * @return self
+     */
+    public function setCreatedAt($created_at)
+    {
+        if (is_null($created_at)) {
+            throw new \InvalidArgumentException('non-nullable created_at cannot be null');
+        }
+        $this->container['created_at'] = $created_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets updated_at
+     *
+     * @return string
+     */
+    public function getUpdatedAt()
+    {
+        return $this->container['updated_at'];
+    }
+
+    /**
+     * Sets updated_at
+     *
+     * @param string $updated_at When the definition was last changed.
+     *
+     * @return self
+     */
+    public function setUpdatedAt($updated_at)
+    {
+        if (is_null($updated_at)) {
+            throw new \InvalidArgumentException('non-nullable updated_at cannot be null');
+        }
+        $this->container['updated_at'] = $updated_at;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * PaginatedAuditEventList
+ * EventSchemaDocumentRequest
  *
  * PHP version 8.1
  *
@@ -32,15 +32,16 @@ use \ArrayAccess;
 use \Santati\Core\ObjectSerializer;
 
 /**
- * PaginatedAuditEventList Class Doc Comment
+ * EventSchemaDocumentRequest Class Doc Comment
  *
  * @category Class
+ * @description A schema document: the body of a draft create or update, and of a dry run.
  * @package  Santati\Core
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSerializable
+class EventSchemaDocumentRequest implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      *
      * @var string
      */
-    protected static $openAPIModelName = 'PaginatedAuditEventList';
+    protected static $openAPIModelName = 'EventSchemaDocumentRequest';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +58,7 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $openAPITypes = [
-        'next' => 'string',
-        'previous' => 'string',
-        'results' => '\Santati\Core\Model\AuditEvent[]'
+        'schema' => 'array<string,mixed>'
     ];
 
     /**
@@ -70,9 +69,7 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'next' => null,
-        'previous' => null,
-        'results' => null
+        'schema' => null
     ];
 
     /**
@@ -81,9 +78,7 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'next' => true,
-        'previous' => true,
-        'results' => false
+        'schema' => false
     ];
 
     /**
@@ -172,9 +167,7 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $attributeMap = [
-        'next' => 'next',
-        'previous' => 'previous',
-        'results' => 'results'
+        'schema' => 'schema'
     ];
 
     /**
@@ -183,9 +176,7 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $setters = [
-        'next' => 'setNext',
-        'previous' => 'setPrevious',
-        'results' => 'setResults'
+        'schema' => 'setSchema'
     ];
 
     /**
@@ -194,9 +185,7 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $getters = [
-        'next' => 'getNext',
-        'previous' => 'getPrevious',
-        'results' => 'getResults'
+        'schema' => 'getSchema'
     ];
 
     /**
@@ -256,9 +245,7 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('next', $data ?? [], null);
-        $this->setIfExists('previous', $data ?? [], null);
-        $this->setIfExists('results', $data ?? [], null);
+        $this->setIfExists('schema', $data ?? [], null);
     }
 
     /**
@@ -288,8 +275,8 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
     {
         $invalidProperties = [];
 
-        if ($this->container['results'] === null) {
-            $invalidProperties[] = "'results' can't be null";
+        if ($this->container['schema'] === null) {
+            $invalidProperties[] = "'schema' can't be null";
         }
         return $invalidProperties;
     }
@@ -307,96 +294,28 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
 
 
     /**
-     * Gets next
+     * Gets schema
      *
-     * @return string|null
+     * @return array<string,mixed>
      */
-    public function getNext()
+    public function getSchema()
     {
-        return $this->container['next'];
+        return $this->container['schema'];
     }
 
     /**
-     * Sets next
+     * Sets schema
      *
-     * @param string|null $next URL of the next page of results, or null on the last page.
+     * @param array<string,mixed> $schema The whole JSON Schema 2020-12 document, as a JSON object. Every `$ref` must point inside it (`#...`).
      *
      * @return self
      */
-    public function setNext($next)
+    public function setSchema($schema)
     {
-        if (is_null($next)) {
-            array_push($this->openAPINullablesSetToNull, 'next');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('next', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($schema)) {
+            throw new \InvalidArgumentException('non-nullable schema cannot be null');
         }
-        $this->container['next'] = $next;
-
-        return $this;
-    }
-
-    /**
-     * Gets previous
-     *
-     * @return string|null
-     */
-    public function getPrevious()
-    {
-        return $this->container['previous'];
-    }
-
-    /**
-     * Sets previous
-     *
-     * @param string|null $previous URL of the previous page of results, or null on the first page.
-     *
-     * @return self
-     */
-    public function setPrevious($previous)
-    {
-        if (is_null($previous)) {
-            array_push($this->openAPINullablesSetToNull, 'previous');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('previous', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['previous'] = $previous;
-
-        return $this;
-    }
-
-    /**
-     * Gets results
-     *
-     * @return \Santati\Core\Model\AuditEvent[]
-     */
-    public function getResults()
-    {
-        return $this->container['results'];
-    }
-
-    /**
-     * Sets results
-     *
-     * @param \Santati\Core\Model\AuditEvent[] $results results
-     *
-     * @return self
-     */
-    public function setResults($results)
-    {
-        if (is_null($results)) {
-            throw new \InvalidArgumentException('non-nullable results cannot be null');
-        }
-        $this->container['results'] = $results;
+        $this->container['schema'] = $schema;
 
         return $this;
     }

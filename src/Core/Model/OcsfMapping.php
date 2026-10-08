@@ -1,6 +1,6 @@
 <?php
 /**
- * PaginatedAuditEventList
+ * OcsfMapping
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Santati\Core\ObjectSerializer;
 
 /**
- * PaginatedAuditEventList Class Doc Comment
+ * OcsfMapping Class Doc Comment
  *
  * @category Class
  * @package  Santati\Core
@@ -40,7 +40,7 @@ use \Santati\Core\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSerializable
+class OcsfMapping implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      *
      * @var string
      */
-    protected static $openAPIModelName = 'PaginatedAuditEventList';
+    protected static $openAPIModelName = 'OcsfMapping';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +57,10 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $openAPITypes = [
-        'next' => 'string',
-        'previous' => 'string',
-        'results' => '\Santati\Core\Model\AuditEvent[]'
+        'version' => 'string',
+        'class_uid' => 'int',
+        'activity_id' => 'int',
+        'status_id' => 'int'
     ];
 
     /**
@@ -70,9 +71,10 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'next' => null,
-        'previous' => null,
-        'results' => null
+        'version' => null,
+        'class_uid' => null,
+        'activity_id' => null,
+        'status_id' => null
     ];
 
     /**
@@ -81,9 +83,10 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'next' => true,
-        'previous' => true,
-        'results' => false
+        'version' => false,
+        'class_uid' => false,
+        'activity_id' => false,
+        'status_id' => true
     ];
 
     /**
@@ -172,9 +175,10 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $attributeMap = [
-        'next' => 'next',
-        'previous' => 'previous',
-        'results' => 'results'
+        'version' => 'version',
+        'class_uid' => 'class_uid',
+        'activity_id' => 'activity_id',
+        'status_id' => 'status_id'
     ];
 
     /**
@@ -183,9 +187,10 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $setters = [
-        'next' => 'setNext',
-        'previous' => 'setPrevious',
-        'results' => 'setResults'
+        'version' => 'setVersion',
+        'class_uid' => 'setClassUid',
+        'activity_id' => 'setActivityId',
+        'status_id' => 'setStatusId'
     ];
 
     /**
@@ -194,9 +199,10 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $getters = [
-        'next' => 'getNext',
-        'previous' => 'getPrevious',
-        'results' => 'getResults'
+        'version' => 'getVersion',
+        'class_uid' => 'getClassUid',
+        'activity_id' => 'getActivityId',
+        'status_id' => 'getStatusId'
     ];
 
     /**
@@ -256,9 +262,10 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('next', $data ?? [], null);
-        $this->setIfExists('previous', $data ?? [], null);
-        $this->setIfExists('results', $data ?? [], null);
+        $this->setIfExists('version', $data ?? [], null);
+        $this->setIfExists('class_uid', $data ?? [], null);
+        $this->setIfExists('activity_id', $data ?? [], null);
+        $this->setIfExists('status_id', $data ?? [], null);
     }
 
     /**
@@ -288,8 +295,17 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
     {
         $invalidProperties = [];
 
-        if ($this->container['results'] === null) {
-            $invalidProperties[] = "'results' can't be null";
+        if ($this->container['version'] === null) {
+            $invalidProperties[] = "'version' can't be null";
+        }
+        if ($this->container['class_uid'] === null) {
+            $invalidProperties[] = "'class_uid' can't be null";
+        }
+        if ($this->container['activity_id'] === null) {
+            $invalidProperties[] = "'activity_id' can't be null";
+        }
+        if ($this->container['status_id'] === null && !$this->isNullableSetToNull('status_id')) {
+            $invalidProperties[] = "'status_id' is required";
         }
         return $invalidProperties;
     }
@@ -307,96 +323,116 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
 
 
     /**
-     * Gets next
+     * Gets version
      *
-     * @return string|null
+     * @return string
      */
-    public function getNext()
+    public function getVersion()
     {
-        return $this->container['next'];
+        return $this->container['version'];
     }
 
     /**
-     * Sets next
+     * Sets version
      *
-     * @param string|null $next URL of the next page of results, or null on the last page.
+     * @param string $version The OCSF release the mapping targets, e.g. 1.9.0.
      *
      * @return self
      */
-    public function setNext($next)
+    public function setVersion($version)
     {
-        if (is_null($next)) {
-            array_push($this->openAPINullablesSetToNull, 'next');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('next', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($version)) {
+            throw new \InvalidArgumentException('non-nullable version cannot be null');
         }
-        $this->container['next'] = $next;
+        $this->container['version'] = $version;
 
         return $this;
     }
 
     /**
-     * Gets previous
+     * Gets class_uid
      *
-     * @return string|null
+     * @return int
      */
-    public function getPrevious()
+    public function getClassUid()
     {
-        return $this->container['previous'];
+        return $this->container['class_uid'];
     }
 
     /**
-     * Sets previous
+     * Sets class_uid
      *
-     * @param string|null $previous URL of the previous page of results, or null on the first page.
+     * @param int $class_uid The OCSF class the action maps to.
      *
      * @return self
      */
-    public function setPrevious($previous)
+    public function setClassUid($class_uid)
     {
-        if (is_null($previous)) {
-            array_push($this->openAPINullablesSetToNull, 'previous');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('previous', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($class_uid)) {
+            throw new \InvalidArgumentException('non-nullable class_uid cannot be null');
         }
-        $this->container['previous'] = $previous;
+        $this->container['class_uid'] = $class_uid;
 
         return $this;
     }
 
     /**
-     * Gets results
+     * Gets activity_id
      *
-     * @return \Santati\Core\Model\AuditEvent[]
+     * @return int
      */
-    public function getResults()
+    public function getActivityId()
     {
-        return $this->container['results'];
+        return $this->container['activity_id'];
     }
 
     /**
-     * Sets results
+     * Sets activity_id
      *
-     * @param \Santati\Core\Model\AuditEvent[] $results results
+     * @param int $activity_id The class's activity_id enum value; 99 is Other, a best fit rather than exact.
      *
      * @return self
      */
-    public function setResults($results)
+    public function setActivityId($activity_id)
     {
-        if (is_null($results)) {
-            throw new \InvalidArgumentException('non-nullable results cannot be null');
+        if (is_null($activity_id)) {
+            throw new \InvalidArgumentException('non-nullable activity_id cannot be null');
         }
-        $this->container['results'] = $results;
+        $this->container['activity_id'] = $activity_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets status_id
+     *
+     * @return int|null
+     */
+    public function getStatusId()
+    {
+        return $this->container['status_id'];
+    }
+
+    /**
+     * Sets status_id
+     *
+     * @param int|null $status_id The OCSF status_id the outcome sets: 2 for a failure, null when the action sets none.
+     *
+     * @return self
+     */
+    public function setStatusId($status_id)
+    {
+        if (is_null($status_id)) {
+            array_push($this->openAPINullablesSetToNull, 'status_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('status_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['status_id'] = $status_id;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * PaginatedAuditEventList
+ * PaginatedEventDefinitionList
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Santati\Core\ObjectSerializer;
 
 /**
- * PaginatedAuditEventList Class Doc Comment
+ * PaginatedEventDefinitionList Class Doc Comment
  *
  * @category Class
  * @package  Santati\Core
@@ -40,7 +40,7 @@ use \Santati\Core\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSerializable
+class PaginatedEventDefinitionList implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      *
      * @var string
      */
-    protected static $openAPIModelName = 'PaginatedAuditEventList';
+    protected static $openAPIModelName = 'PaginatedEventDefinitionList';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -59,7 +59,7 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
     protected static $openAPITypes = [
         'next' => 'string',
         'previous' => 'string',
-        'results' => '\Santati\Core\Model\AuditEvent[]'
+        'results' => '\Santati\Core\Model\EventDefinition[]'
     ];
 
     /**
@@ -377,7 +377,7 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Gets results
      *
-     * @return \Santati\Core\Model\AuditEvent[]
+     * @return \Santati\Core\Model\EventDefinition[]
      */
     public function getResults()
     {
@@ -387,7 +387,7 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets results
      *
-     * @param \Santati\Core\Model\AuditEvent[] $results results
+     * @param \Santati\Core\Model\EventDefinition[] $results results
      *
      * @return self
      */

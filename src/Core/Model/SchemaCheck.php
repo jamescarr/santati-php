@@ -1,6 +1,6 @@
 <?php
 /**
- * PaginatedAuditEventList
+ * SchemaCheck
  *
  * PHP version 8.1
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \Santati\Core\ObjectSerializer;
 
 /**
- * PaginatedAuditEventList Class Doc Comment
+ * SchemaCheck Class Doc Comment
  *
  * @category Class
  * @package  Santati\Core
@@ -40,7 +40,7 @@ use \Santati\Core\ObjectSerializer;
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSerializable
+class SchemaCheck implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      *
      * @var string
      */
-    protected static $openAPIModelName = 'PaginatedAuditEventList';
+    protected static $openAPIModelName = 'SchemaCheck';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +57,9 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $openAPITypes = [
-        'next' => 'string',
-        'previous' => 'string',
-        'results' => '\Santati\Core\Model\AuditEvent[]'
+        'checked' => 'int',
+        'failed' => 'int',
+        'failures' => '\Santati\Core\Model\SchemaCheckFailure[]'
     ];
 
     /**
@@ -70,9 +70,9 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'next' => null,
-        'previous' => null,
-        'results' => null
+        'checked' => null,
+        'failed' => null,
+        'failures' => null
     ];
 
     /**
@@ -81,9 +81,9 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'next' => true,
-        'previous' => true,
-        'results' => false
+        'checked' => false,
+        'failed' => false,
+        'failures' => false
     ];
 
     /**
@@ -172,9 +172,9 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $attributeMap = [
-        'next' => 'next',
-        'previous' => 'previous',
-        'results' => 'results'
+        'checked' => 'checked',
+        'failed' => 'failed',
+        'failures' => 'failures'
     ];
 
     /**
@@ -183,9 +183,9 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $setters = [
-        'next' => 'setNext',
-        'previous' => 'setPrevious',
-        'results' => 'setResults'
+        'checked' => 'setChecked',
+        'failed' => 'setFailed',
+        'failures' => 'setFailures'
     ];
 
     /**
@@ -194,9 +194,9 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      * @var string[]
      */
     protected static $getters = [
-        'next' => 'getNext',
-        'previous' => 'getPrevious',
-        'results' => 'getResults'
+        'checked' => 'getChecked',
+        'failed' => 'getFailed',
+        'failures' => 'getFailures'
     ];
 
     /**
@@ -256,9 +256,9 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('next', $data ?? [], null);
-        $this->setIfExists('previous', $data ?? [], null);
-        $this->setIfExists('results', $data ?? [], null);
+        $this->setIfExists('checked', $data ?? [], null);
+        $this->setIfExists('failed', $data ?? [], null);
+        $this->setIfExists('failures', $data ?? [], null);
     }
 
     /**
@@ -288,8 +288,14 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
     {
         $invalidProperties = [];
 
-        if ($this->container['results'] === null) {
-            $invalidProperties[] = "'results' can't be null";
+        if ($this->container['checked'] === null) {
+            $invalidProperties[] = "'checked' can't be null";
+        }
+        if ($this->container['failed'] === null) {
+            $invalidProperties[] = "'failed' can't be null";
+        }
+        if ($this->container['failures'] === null) {
+            $invalidProperties[] = "'failures' can't be null";
         }
         return $invalidProperties;
     }
@@ -307,96 +313,82 @@ class PaginatedAuditEventList implements ModelInterface, ArrayAccess, \JsonSeria
 
 
     /**
-     * Gets next
+     * Gets checked
      *
-     * @return string|null
+     * @return int
      */
-    public function getNext()
+    public function getChecked()
     {
-        return $this->container['next'];
+        return $this->container['checked'];
     }
 
     /**
-     * Sets next
+     * Sets checked
      *
-     * @param string|null $next URL of the next page of results, or null on the last page.
+     * @param int $checked How many of the newest stored events were run.
      *
      * @return self
      */
-    public function setNext($next)
+    public function setChecked($checked)
     {
-        if (is_null($next)) {
-            array_push($this->openAPINullablesSetToNull, 'next');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('next', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($checked)) {
+            throw new \InvalidArgumentException('non-nullable checked cannot be null');
         }
-        $this->container['next'] = $next;
+        $this->container['checked'] = $checked;
 
         return $this;
     }
 
     /**
-     * Gets previous
+     * Gets failed
      *
-     * @return string|null
+     * @return int
      */
-    public function getPrevious()
+    public function getFailed()
     {
-        return $this->container['previous'];
+        return $this->container['failed'];
     }
 
     /**
-     * Sets previous
+     * Sets failed
      *
-     * @param string|null $previous URL of the previous page of results, or null on the first page.
+     * @param int $failed How many of them the document would reject.
      *
      * @return self
      */
-    public function setPrevious($previous)
+    public function setFailed($failed)
     {
-        if (is_null($previous)) {
-            array_push($this->openAPINullablesSetToNull, 'previous');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('previous', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
+        if (is_null($failed)) {
+            throw new \InvalidArgumentException('non-nullable failed cannot be null');
         }
-        $this->container['previous'] = $previous;
+        $this->container['failed'] = $failed;
 
         return $this;
     }
 
     /**
-     * Gets results
+     * Gets failures
      *
-     * @return \Santati\Core\Model\AuditEvent[]
+     * @return \Santati\Core\Model\SchemaCheckFailure[]
      */
-    public function getResults()
+    public function getFailures()
     {
-        return $this->container['results'];
+        return $this->container['failures'];
     }
 
     /**
-     * Sets results
+     * Sets failures
      *
-     * @param \Santati\Core\Model\AuditEvent[] $results results
+     * @param \Santati\Core\Model\SchemaCheckFailure[] $failures The first failing events, at most 50.
      *
      * @return self
      */
-    public function setResults($results)
+    public function setFailures($failures)
     {
-        if (is_null($results)) {
-            throw new \InvalidArgumentException('non-nullable results cannot be null');
+        if (is_null($failures)) {
+            throw new \InvalidArgumentException('non-nullable failures cannot be null');
         }
-        $this->container['results'] = $results;
+        $this->container['failures'] = $failures;
 
         return $this;
     }
